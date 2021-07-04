@@ -5,15 +5,27 @@
     "measure": "如何测量",
     "top": "上胸围",
     "bottom": "下胸围",
+    "waist": "腰围",
     "buttocks": "臀围",
     "leg": "腿围",
     "code": "验证码",
     "inTop": "请输入上胸围（cm）",
     "inBottom": "请输入下胸围（cm）",
+    "inWaist": "请输入下胸围（cm）",
     "inButtocks": "请输入臀围（cm）",
     "inLeg": "请输入腿围（cm）",
     "incode": "请输入验证码",
     "compute": "计算尺码"
   },
-  "measure":{}
+  "measure":{
+    "title":"测量方法",
+    "topDescribe":"胸部最丰满处一周的尺寸",
+    "topExplain":"注意皮尺不要压迫乳头，轻轻挨着即可",
+    "bottomDescribe":"乳房底部一周的尺寸",
+    "waistDescribe":"上身最细的位置一周的尺寸",
+    "buttocksDescribe":"臀部最宽的位置一周的尺寸",
+    "legDescribe":"单只大腿最粗的位置一周的尺寸",
+    "tipsLable":"温馨提示",
+    "tips":"请您双脚并拢笔直站立，测量时不要含胸驼背，注意软尺保持水平不要上下倾斜。 "
+  }
 }

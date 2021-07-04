@@ -11,7 +11,7 @@
                 <span>{{state.t("form.info")}}</span>
                 <span class="measure_btn">
                     <van-icon name="question-o" />
-                    <span>{{state.t("form.measure")}}</span>
+                    <span @click="() =>{state.showPopup = true}">{{state.t("form.measure")}}</span>
                 </span>
             </div>
             <van-dropdown-menu :overlay="false" z-index="99">
@@ -26,6 +26,10 @@
             <div>
                 <span class="form_lable">{{state.t("form.bottom")}}</span>
                 <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inBottom')" />
+            </div>
+            <div>
+                <span class="form_lable">{{state.t("form.waist")}}</span>
+                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inWaist')" />
             </div>
             <div>
                 <span class="form_lable">{{state.t("form.buttocks")}}</span>
@@ -43,9 +47,14 @@
             <van-button color="#ff5a60">{{state.t("form.compute")}}</van-button>
         </div>
     </div>
+    <!-- 弹出层 -->
+    <van-popup v-model:show="state.showPopup" position="bottom" :style="{ background: 'transparent'}">
+        <MeasureMethod v-if="state.showPopup" @closePopup="closePopup"></MeasureMethod>
+    </van-popup>
 </template>
 
 <script setup>
+import MeasureMethod from './MeasureMethod.vue'
 import { api } from 'apis/base_api.js'
 import { useI18n } from 'vue-i18n'
 import { reactive } from 'vue'
@@ -53,6 +62,7 @@ import { reactive } from 'vue'
 const state = reactive({
     tBust: null,    // 上胸围
     bBust: null,    // 下胸围
+    showPopup:false,
     t:useI18n().t,
     locale:useI18n().locale,
     option:[
@@ -60,6 +70,9 @@ const state = reactive({
         { text: '英文', value: 'en' }
     ]
 });
+function closePopup(){
+    state.showPopup = false
+}
 </script>
 
 <style scoped>
@@ -158,7 +171,7 @@ const state = reactive({
         background: #fff;
         border-radius: 35px; 
         box-shadow:0px 1px 15px 2.5px #2e2d2f61;   
-        margin-bottom: 20px;
+        margin-bottom: 70px;
     }
     .form_box>div{
         margin-bottom: 45px;
