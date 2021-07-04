@@ -1,3 +1,19 @@
 {
-  "home": "语言"
+  "form":{
+    "title":"调整型内衣智能尺码计算器",
+    "info": "基本信息",
+    "measure": "如何测量",
+    "top": "上胸围",
+    "bottom": "下胸围",
+    "buttocks": "臀围",
+    "leg": "腿围",
+    "code": "验证码",
+    "inTop": "请输入上胸围（cm）",
+    "inBottom": "请输入下胸围（cm）",
+    "inButtocks": "请输入臀围（cm）",
+    "inLeg": "请输入腿围（cm）",
+    "incode": "请输入验证码",
+    "compute": "计算尺码"
+  },
+  "measure":{}
 }

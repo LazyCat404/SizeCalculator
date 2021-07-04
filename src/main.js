@@ -7,7 +7,9 @@ import store from "./store";
 import { 
     Icon,
     Field, 
-    Button
+    Button,
+    DropdownMenu,
+    DropdownItem
 } from 'vant';
 
 import 'amfe-flexible/index.js';
@@ -21,6 +23,8 @@ createApp(App)
     .use(Icon)
     .use(Field)
     .use(Button)
+    .use(DropdownMenu)
+    .use(DropdownItem)
     .use(i18n)
     .use(store)
     .use(router)

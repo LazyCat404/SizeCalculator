@@ -3,54 +3,63 @@
         <div class="logo_box">
             <img src="../../assets/images/logo_03.png">
         </div>
-        <div>调整型内衣智能尺码计算器</div>
+        <div>{{state.t("form.title")}}</div>
     </div>
     <div class="form_body">
         <div class="title_form">
             <div>
-                <span>基本信息</span>
+                <span>{{state.t("form.info")}}</span>
                 <span class="measure_btn">
                     <van-icon name="question-o" />
-                    <span>如何测量</span>
+                    <span>{{state.t("form.measure")}}</span>
                 </span>
             </div>
+            <van-dropdown-menu :overlay="false" z-index="99">
+                <van-dropdown-item :title="state.locale == 'en' ? '英文' : '中文'" v-model="state.locale" :options="state.option"/>
+            </van-dropdown-menu>
         </div>
         <div class="form_box">
             <div>
-                <span class="form_lable">上胸围</span>
-                <van-field v-model="state.tBust" type="number" placeholder="请输入上胸围（cm）" />
+                <span class="form_lable">{{state.t("form.top")}}</span>
+                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inTop')" />
             </div>
             <div>
-                <span class="form_lable">下胸围</span>
-                <van-field v-model="state.tBust" type="number" placeholder="请输入下胸围（cm）" />
+                <span class="form_lable">{{state.t("form.bottom")}}</span>
+                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inBottom')" />
             </div>
             <div>
-                <span class="form_lable">臀围</span>
-                <van-field v-model="state.tBust" type="number" placeholder="请输入臀围（cm）" />
+                <span class="form_lable">{{state.t("form.buttocks")}}</span>
+                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inButtocks')" />
             </div>
             <div>
-                <span class="form_lable">腿围</span>
-                <van-field v-model="state.tBust" type="number" placeholder="请输入腿围（cm）" />
+                <span class="form_lable">{{state.t("form.leg")}}</span>
+                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inLeg')" />
             </div>
             <div>
-                <span class="form_lable">验证码</span>
-                <van-field v-model="state.tBust" type="number" placeholder="请输入验证码" />
+                <span class="form_lable">{{state.t("form.code")}}</span>
+                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.code')" />
                 <span class="verification_code">1234</span>
             </div>
-            <van-button color="#ff5a60">普通按钮</van-button>
+            <van-button color="#ff5a60">{{state.t("form.compute")}}</van-button>
         </div>
     </div>
 </template>
 
 <script setup>
 import { api } from 'apis/base_api.js'
-import { reactive } from 'vue';
+import { useI18n } from 'vue-i18n'
+import { reactive } from 'vue'
+
 const state = reactive({
     tBust: null,    // 上胸围
     bBust: null,    // 下胸围
-
+    t:useI18n().t,
+    locale:useI18n().locale,
+    option:[
+        { text: '中文', value: 'zh' },
+        { text: '英文', value: 'en' }
+    ]
 });
-
 </script>
 
 <style scoped>
@@ -80,6 +89,7 @@ const state = reactive({
         font-size: 30px;
         color: #fff;
         margin-left: 30px;
+        position: relative;
     }
     .measure_btn{
         font-size:22px;
@@ -89,6 +99,57 @@ const state = reactive({
         border-bottom: 1px solid #fff;
         cursor: pointer;
         margin-left:5px;
+    }
+    .van-dropdown-menu{
+        width: 93px;
+        height: 32px;
+        float: right;
+        border: 1px solid #fff;
+        font-size: 22px;
+        overflow: hidden;
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        border-radius: 5px;
+    }
+    .van-dropdown-menu >>> .van-dropdown-menu__bar{
+        height: 32px;
+        padding-right: 5px;
+        background: transparent;
+    }
+    .van-dropdown-menu >>> .van-dropdown-menu__title{
+        font-size: 22px;
+        padding:0;
+        padding-right:10px;
+        color: #fff;
+    }
+    .van-dropdown-item{
+        height: 150px;
+        top: 264.01px;
+        display:flex;
+        justify-content: center;
+    }
+    .van-dropdown-item >>> .van-popup{
+        background: transparent;
+    }
+    .van-dropdown-item >>> .van-dropdown-item__content{
+        position: relative;
+        width: 750px;
+    }
+    .van-dropdown-item >>> .van-cell {
+        width: 155px;
+        font-size: 22px;
+        margin-left: 560px;
+        padding: 5px 30px;
+        border: 1px solid #ddd;
+    }
+    .van-dropdown-item >>> .van-cell:first-child {
+        border-bottom:0 ;
+        border-radius:5px 5px 0 0;
+    }
+    .van-dropdown-item >>> .van-cell:last-child {
+        border-top:0 ;
+        border-radius:0 0 5px 5px;
     }
     .form_box{
         width: 620px;
