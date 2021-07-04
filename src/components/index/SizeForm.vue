@@ -137,9 +137,9 @@ const state = reactive({
         width: 750px;
     }
     .van-dropdown-item >>> .van-cell {
-        width: 155px;
+        width: 165px;
         font-size: 22px;
-        margin-left: 560px;
+        margin-left: 555px;
         padding: 5px 30px;
         border: 1px solid #ddd;
     }
