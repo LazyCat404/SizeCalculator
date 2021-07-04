@@ -1,0 +1,7 @@
+<template>
+尺码表单
+</template>
+
+<script setup>
+import { api } from 'apis/base_api.js'
+</script>
