@@ -3,6 +3,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import styleImport from 'vite-plugin-style-import'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -17,6 +18,15 @@ export default defineConfig({
     vue(),
     vueI18n({
       include: path.resolve(__dirname, './src/language/**'),
-    })
+    }),
+    styleImport({
+      libs: [
+        {
+          libraryName: 'vant',
+          esModule: true,
+          resolveStyle: (name) => `vant/es/${name}/style`,
+        },
+      ],
+    }),
   ]
 })
