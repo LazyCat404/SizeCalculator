@@ -1,0 +1,19 @@
+{
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "vue": "^3.0.5",
+    "vue-i18n": "^9.1.6"
+  },
+  "devDependencies": {
+    "@intlify/vite-plugin-vue-i18n": "^2.3.0",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "^3.0.5",
+    "vite": "^2.3.8",
+    "vite-plugin-i18n-resources": "^1.0.3"
+  }
+}
