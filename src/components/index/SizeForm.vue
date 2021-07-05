@@ -115,6 +115,7 @@
 
 <script setup>
 import MeasureMethod from './MeasureMethod.vue'
+import { useRouter } from 'vue-router';
 import { api } from 'apis/base_api.js'
 import { useI18n } from 'vue-i18n'
 import { reactive,defineProps} from 'vue'
@@ -122,6 +123,8 @@ import { Toast } from 'vant'
 const props =  defineProps({
     init:Object
 })
+// 路由实列
+const router = useRouter();
 const state = reactive({
     form:{
         tBust: null,        // 上胸围
@@ -198,11 +201,25 @@ const fromCheck = {
 // 提交表单
 function onSubmit(){
     // 表单验证通过
-    api.submitForm(
-
-    ).then(res => {
+    api.submitForm({
+        tBust: state.form.tBust,        // 上胸围
+        bBust: state.form.bBust,        // 下胸围
+        waist: state.form.waist,        // 腰围
+        buttocks: state.form.buttocks,     // 臀围
+        leg:state.formleg           // 腿围
+    }).then(res => {
         if(res.result == "SUCCESS"){
             // 路由跳转
+            router.push({
+                name:'Recommend',
+                params:{
+                    tBust: state.form.tBust,        // 上胸围
+                    bBust: state.form.bBust,        // 下胸围
+                    waist: state.waist,        // 腰围
+                    buttocks: state.form.buttocks,     // 臀围
+                    leg:state.form.leg,           // 腿围
+                }
+            })
         }else{
             // 错误提示
             Toast.fail(res.result);
