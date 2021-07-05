@@ -18,40 +18,92 @@
                 <van-dropdown-item :title="state.locale == 'en' ? '英文' : '中文'" v-model="state.locale" :options="state.option"/>
             </van-dropdown-menu>
         </div>
-        <div class="form_box">
-            <div>
-                <span class="form_lable">{{state.t("form.top")}}</span>
-                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inTop')" />
-            </div>
-            <div>
-                <span class="form_lable">{{state.t("form.bottom")}}</span>
-                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inBottom')" />
-            </div>
-            <div>
-                <span class="form_lable">{{state.t("form.waist")}}</span>
-                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inWaist')" />
-            </div>
-            <div>
-                <span class="form_lable">{{state.t("form.buttocks")}}</span>
-                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inButtocks')" />
-            </div>
-            <div>
-                <span class="form_lable">{{state.t("form.leg")}}</span>
-                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.inLeg')" />
-            </div>
-            <div>
-                <span class="form_lable">{{state.t("form.code")}}</span>
-                <van-field v-model="state.tBust" type="number" :placeholder="state.t('form.code')" />
-                <span class="verification_code">1234</span>
-            </div>
-            <van-button color="#ff5a60">{{state.t("form.compute")}}</van-button>
-            <div class="tips">
+        <van-form @submit="onSubmit">
+            <div class="form_box">
                 <div>
-                    <span>{{state.t("measure.tipsLable")}} </span>
-                    <div>{{state.t("form.tips")}}</div>
+                    <span class="form_lable">{{state.t("form.top")}}</span>
+                    <van-field 
+                        v-model="state.form.tBust" 
+                        type="number" 
+                        :placeholder="state.t('form.inTop')" 
+                        :rules="[
+                            { required: true, message: `${state.t('form.inTop')}` },
+                            { validator: fromCheck.top }
+                        ]"
+                    />
+                </div>
+                <div>
+                    <span class="form_lable">{{state.t("form.bottom")}}</span>
+                    <van-field 
+                        v-model="state.form.bBust" 
+                        type="number" 
+                        :placeholder="state.t('form.inBottom')" 
+                        :rules="[
+                            { required: true, message: `${state.t('form.inBottom')}` },
+                            { validator: fromCheck.bottom }
+                        ]"
+                    />
+                </div>
+                <div>
+                    <span class="form_lable">{{state.t("form.waist")}}</span>
+                    <van-field 
+                        v-model="state.form.waist" 
+                        type="number" 
+                        :placeholder="state.t('form.inWaist')" 
+                        :rules="[
+                            { required: true, message: `${state.t('form.inWaist')}` },
+                            { validator: fromCheck.waist }
+                        ]"
+                    />
+                </div>
+                <div>
+                    <span class="form_lable">{{state.t("form.buttocks")}}</span>
+                    <van-field 
+                        v-model="state.form.buttocks" 
+                        type="number" 
+                        :placeholder="state.t('form.inButtocks')"
+                        :rules="[
+                            { required: true, message: `${state.t('form.inButtocks')}` },
+                            { validator: fromCheck.buttocks }
+                        ]" 
+                    />
+                </div>
+                <div>
+                    <span class="form_lable">{{state.t("form.leg")}}</span>
+                    <van-field 
+                        v-model="state.form.leg" 
+                        type="number" 
+                        :placeholder="state.t('form.inLeg')"
+                        :rules="[
+                            { required: true, message: `${state.t('form.inLeg')}` },
+                            { validator: fromCheck.leg }
+                        ]"  
+                    />
+                </div>
+                <div>
+                    <span class="form_lable">{{state.t("form.code")}}</span>
+                    <van-field 
+                        v-model="state.form.code" 
+                        type="number" 
+                        :placeholder="state.t('form.code')" 
+                        :rules="[
+                            { required: true, message: `${state.t('form.incode')}` },
+                            { validator: fromCheck.code }
+                        ]"
+                    />
+                    <span class="verification_code">{{state.rCode}}</span>
+                </div>
+                <!-- 按钮 -->
+                <van-button color="#ff5a60" native-type="submit">{{state.t("form.compute")}}</van-button>
+                <!-- 提示 -->
+                <div class="tips">
+                    <div>
+                        <span>{{state.t("measure.tipsLable")}} </span>
+                        <div>{{state.t("form.tips")}}</div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </van-form>
     </div>
     <!-- 弹出层 -->
     <van-popup v-model:show="state.showPopup" position="bottom" :style="{ background: 'transparent'}">
@@ -66,16 +118,81 @@ import { useI18n } from 'vue-i18n'
 import { reactive } from 'vue'
 
 const state = reactive({
-    tBust: null,    // 上胸围
-    bBust: null,    // 下胸围
-    showPopup:false,
+    form:{
+        tBust: null,        // 上胸围
+        bBust: null,        // 下胸围
+        waist: null,        // 腰围
+        buttocks: null,     // 臀围
+        leg:null,           // 腿围
+        code:null,          // 验证码
+    },
+    showPopup:false,// 显示弹出层
     t:useI18n().t,
     locale:useI18n().locale,
     option:[
         { text: '中文', value: 'zh' },
         { text: '英文', value: 'en' }
-    ]
+    ],
+    rCode:1234  // 真实验证码
 });
+// 表单验证
+const fromCheck = {
+    top:(val)=>{
+        if( 75 <= val && val <= 127.5){
+            if(val < state.form.bBust){
+                return  state.t('tips.tp')
+            }else{
+                return true
+            }
+        }else{
+            return  state.t('tips.tErr')
+        }
+    },
+    bottom:(val)=>{
+        if( 65 <= val && val <= 100){
+            return true
+        }else{
+            return  state.t('tips.bErr')
+        }
+    },
+    waist:(val)=>{
+        if( 55 <= val && val <= 127){
+            if(val > state.form.buttocks){
+                return  state.t('tips.wb')
+            }else{
+                return true
+            }
+        }else{
+            return  state.t('tips.wErr')
+        }
+    },
+    buttocks:(val)=>{
+        if( 79 <= val && val <= 128){
+            return true
+        }else{
+            return  state.t('tips.dErr')
+        }
+    },
+    leg:(val)=>{
+        if( 42 <= val && val <= 74){
+            return true
+        }else{
+            return  state.t('tips.lErr')
+        }
+    },
+    code:(val)=>{
+        if( val == state.rCode){
+            return true
+        }else{
+            return  state.t('tips.code')
+        }
+    },
+}
+// 提交表单
+function onSubmit(val){
+    console.log(val)
+}
+// 关闭弹出层
 function closePopup(){
     state.showPopup = false
 }
@@ -161,6 +278,15 @@ function closePopup(){
         margin-left: 555px;
         padding: 5px 30px;
         border: 1px solid #ddd;
+    }
+    .van-cell{
+        overflow: inherit;
+    }
+    .van-cell >>> .van-field__error-message{
+        color: #ee0a24b3;
+        position: absolute;
+        font-size: 16px;
+        top: 40px;
     }
     .van-dropdown-item >>> .van-cell:first-child {
         border-bottom:0 ;

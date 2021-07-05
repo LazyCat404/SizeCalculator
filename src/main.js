@@ -6,7 +6,9 @@ import store from "./store";
 
 import { 
     Icon,
+    Form,  
     Field, 
+    CellGroup,
     Button,
     DropdownMenu,
     DropdownItem,
@@ -22,7 +24,9 @@ import './assets/css/base.css';
 
 createApp(App)
     .use(Icon)
+    .use(Form)
     .use(Field)
+    .use(CellGroup)
     .use(Button)
     .use(DropdownMenu)
     .use(DropdownItem)
