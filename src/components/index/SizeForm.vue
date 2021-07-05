@@ -1,10 +1,12 @@
 <template>
+    <!-- logo -->
     <div class="title_logo">
         <div class="logo_box">
             <img src="../../assets/images/logo_03.png">
         </div>
         <div>{{state.t("form.title")}}</div>
     </div>
+    <!-- 表单 -->
     <div class="form_body">
         <div class="title_form">
             <div>
@@ -45,18 +47,6 @@
                     />
                 </div>
                 <div>
-                    <span class="form_lable">{{state.t("form.waist")}}</span>
-                    <van-field 
-                        v-model="state.form.waist" 
-                        type="number" 
-                        :placeholder="state.t('form.inWaist')" 
-                        :rules="[
-                            { required: true, message: `${state.t('form.inWaist')}` },
-                            { validator: fromCheck.waist }
-                        ]"
-                    />
-                </div>
-                <div>
                     <span class="form_lable">{{state.t("form.buttocks")}}</span>
                     <van-field 
                         v-model="state.form.buttocks" 
@@ -66,6 +56,18 @@
                             { required: true, message: `${state.t('form.inButtocks')}` },
                             { validator: fromCheck.buttocks }
                         ]" 
+                    />
+                </div>
+                <div>
+                    <span class="form_lable">{{state.t("form.waist")}}</span>
+                    <van-field 
+                        v-model="state.form.waist" 
+                        type="number" 
+                        :placeholder="state.t('form.inWaist')" 
+                        :rules="[
+                            { required: true, message: `${state.t('form.inWaist')}` },
+                            { validator: fromCheck.waist }
+                        ]"
                     />
                 </div>
                 <div>
@@ -115,8 +117,11 @@
 import MeasureMethod from './MeasureMethod.vue'
 import { api } from 'apis/base_api.js'
 import { useI18n } from 'vue-i18n'
-import { reactive } from 'vue'
-
+import { reactive,defineProps} from 'vue'
+import { Toast } from 'vant'
+const props =  defineProps({
+    init:Object
+})
 const state = reactive({
     form:{
         tBust: null,        // 上胸围
@@ -133,8 +138,10 @@ const state = reactive({
         { text: '中文', value: 'zh' },
         { text: '英文', value: 'en' }
     ],
-    rCode:1234  // 真实验证码
+    rCode:props.init.code  // 真实验证码
 });
+// 初始化地区
+state.locale = props.init.region
 // 表单验证
 const fromCheck = {
     top:(val)=>{
@@ -189,8 +196,18 @@ const fromCheck = {
     },
 }
 // 提交表单
-function onSubmit(val){
-    console.log(val)
+function onSubmit(){
+    // 表单验证通过
+    api.submitForm(
+
+    ).then(res => {
+        if(res.result == "SUCCESS"){
+            // 路由跳转
+        }else{
+            // 错误提示
+            Toast.fail(res.result);
+        }
+    })
 }
 // 关闭弹出层
 function closePopup(){

@@ -1,7 +1,8 @@
 /**
  * axios封装
  */
- import axios from 'axios';
+import axios from 'axios';
+import { Toast } from 'vant'
 
 // 环境的切换
 if (process.env.NODE_ENV === 'development') {   //开发环境
@@ -19,11 +20,31 @@ axios.defaults.timeout = 10000;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
 /**
+ * http request 请求拦截
+ */
+
+let vantToast = null
+axios.interceptors.request.use(
+    config => {
+        vantToast = Toast.loading({
+            forbidClick: true,
+            loadingType: 'spinner',
+            duration:0
+        });
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
+
+/**
  * http response 响应拦截 
  */ 
 axios.interceptors.response.use(
     response => {
         if (response.status === 200) {
+            vantToast.close()
             return Promise.resolve(response);
         } else {
             return Promise.reject(response);
