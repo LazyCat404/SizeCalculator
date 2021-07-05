@@ -23,7 +23,7 @@
         <van-form @submit="onSubmit">
             <div class="form_box">
                 <div>
-                    <span class="form_lable">{{state.t("form.top")}}</span>
+                    <span class="form_lable">{{state.t("form.top")}}(cm)</span>
                     <van-field 
                         v-model="state.form.tBust" 
                         type="number" 
@@ -35,7 +35,7 @@
                     />
                 </div>
                 <div>
-                    <span class="form_lable">{{state.t("form.bottom")}}</span>
+                    <span class="form_lable">{{state.t("form.bottom")}}(cm)</span>
                     <van-field 
                         v-model="state.form.bBust" 
                         type="number" 
@@ -47,7 +47,7 @@
                     />
                 </div>
                 <div>
-                    <span class="form_lable">{{state.t("form.buttocks")}}</span>
+                    <span class="form_lable">{{state.t("form.buttocks")}}(cm)</span>
                     <van-field 
                         v-model="state.form.buttocks" 
                         type="number" 
@@ -59,7 +59,7 @@
                     />
                 </div>
                 <div>
-                    <span class="form_lable">{{state.t("form.waist")}}</span>
+                    <span class="form_lable">{{state.t("form.waist")}}(cm)</span>
                     <van-field 
                         v-model="state.form.waist" 
                         type="number" 
@@ -71,7 +71,7 @@
                     />
                 </div>
                 <div>
-                    <span class="form_lable">{{state.t("form.leg")}}</span>
+                    <span class="form_lable">{{state.t("form.leg")}}(cm)</span>
                     <van-field 
                         v-model="state.form.leg" 
                         type="number" 
@@ -215,9 +215,15 @@ function onSubmit(){
                 params:{
                     tBust: state.form.tBust,        // 上胸围
                     bBust: state.form.bBust,        // 下胸围
-                    waist: state.waist,        // 腰围
+                    waist: state.form.waist,        // 腰围
                     buttocks: state.form.buttocks,     // 臀围
                     leg:state.form.leg,           // 腿围
+                    size1:res.data.compressionPants, 
+                    size2:res.data.compressionPants, 
+                    size3:res.data.compressionPants, 
+                    size4:res.data.compressionPants, 
+                    size5:res.data.compressionPants, 
+                    size6:res.data.compressionPants 
                 }
             })
         }else{
