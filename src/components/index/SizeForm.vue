@@ -45,6 +45,12 @@
                 <span class="verification_code">1234</span>
             </div>
             <van-button color="#ff5a60">{{state.t("form.compute")}}</van-button>
+            <div class="tips">
+                <div>
+                    <span>{{state.t("measure.tipsLable")}} </span>
+                    <div>{{state.t("form.tips")}}</div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- 弹出层 -->
@@ -202,5 +208,26 @@ function closePopup(){
         right: 5px;
         font-size: 24px;
         color: #5f5f5f;
+    }
+    .form_box>div.tips{
+        font-size: 16px;
+        margin: 0;
+        margin-top:10px;
+        line-height: 40px;
+        color: #606060;
+    }
+    .tips>div{
+        overflow: hidden;
+        width: fit-content;
+        margin: 0 auto;
+        display: flex;
+    }
+    .tips>div>span{
+        width: 82PX;
+        float: left;
+        text-align: right;
+    }
+    .tips>div>div{
+        float: left;
     }
 </style>

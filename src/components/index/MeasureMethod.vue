@@ -13,7 +13,7 @@
             </div>
         </li>
         <li class="tip">
-            <span>{{state.t("measure.tipsLable")}}</span>:<div>{{state.t("measure.tips")}}</div>
+            <span>{{state.t("measure.tipsLable")}}</span><div>{{state.t("measure.tips")}}</div>
         </li>
     </ul>
 </template>
@@ -120,10 +120,11 @@ const emit = defineEmits(["closePopup"])
         display: flex;
     }
     li.tip>span{
-        width: 157px
+        width: 190px;
+        text-align: right;
     }
     li.tip>div{
-        margin-left:10px;
+        margin-left:0px;
     }
     li >>> .van-badge__wrapper{
         float: right;
