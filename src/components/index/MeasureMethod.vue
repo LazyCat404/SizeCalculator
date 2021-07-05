@@ -2,7 +2,7 @@
     <ul class="list_box">
         <li>
             {{state.t("measure.title")}}
-            <van-icon name="arrow-down" />
+            <van-icon name="arrow-down" @click="emit('closePopup')" />
         </li>
         <li v-for="(item,i) in measureList" :key="i" >
             <img :src="item.img">
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive,defineEmits} from 'vue'
 import { useI18n } from 'vue-i18n'
 import img1 from '../../assets/images/logo_03.png'
 import img2 from '../../assets/images/logo_03.png'
@@ -61,6 +61,8 @@ const measureList = [
         img:img5
     }
 ]
+const emit = defineEmits(["closePopup"])
+
 </script>
 
 <style scoped>
