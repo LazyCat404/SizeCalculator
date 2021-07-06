@@ -202,11 +202,12 @@ const fromCheck = {
 function onSubmit(){
     // 表单验证通过
     api.submitForm({
-        tBust: state.form.tBust,        // 上胸围
-        bBust: state.form.bBust,        // 下胸围
+        bustTop: state.form.tBust,        // 上胸围
+        bustDown: state.form.bBust,        // 下胸围
         waist: state.form.waist,        // 腰围
-        buttocks: state.form.buttocks,     // 臀围
-        leg:state.formleg           // 腿围
+        hipline: state.form.buttocks,     // 臀围
+        thigh:state.form.leg,           // 腿围
+        captcha:state.form.code
     }).then(res => {
         if(res.result == "SUCCESS"){
             // 路由跳转
@@ -223,7 +224,8 @@ function onSubmit(){
                     size3:res.data.compressionPants, 
                     size4:res.data.compressionPants, 
                     size5:res.data.compressionPants, 
-                    size6:res.data.compressionPants 
+                    size6:res.data.compressionPants,
+                    imgUrl:res.data.image
                 }
             })
         }else{
@@ -389,7 +391,7 @@ function closePopup(){
         display: flex;
     }
     .tips>div>span{
-        width: 82PX;
+        width: 100PX;
         float: left;
         text-align: right;
     }

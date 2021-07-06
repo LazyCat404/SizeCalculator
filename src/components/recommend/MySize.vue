@@ -6,7 +6,7 @@
             <div>{{item.size}}</div>
         </li>
     </ul>
-    <van-button color="#ff5a60" native-type="submit">{{state.t("recommend.btn")}}</van-button>
+    <van-button color="#ff5a60" native-type="submit" @click="downImg">{{state.t("recommend.btn")}}</van-button>
 </template>
 
 <script setup>
@@ -35,6 +35,12 @@ const state = reactive({
         size:route.params.leg
     }]
 })
+
+// 图片下载
+function downImg(){
+
+}
+
 </script>
 
 <style scoped>
