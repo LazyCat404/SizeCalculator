@@ -6,7 +6,9 @@
             <div>{{item.size}}</div>
         </li>
     </ul>
-    <van-button color="#ff5a60" native-type="submit" @click="downImg">{{state.t("recommend.btn")}}</van-button>
+    <van-button color="#ff5a60" native-type="submit" @click="downImg">
+        {{state.t("recommend.btn")}}
+    </van-button>
 </template>
 
 <script setup>
@@ -38,7 +40,13 @@ const state = reactive({
 
 // 图片下载
 function downImg(){
-
+    const aLink = document.createElement('a');
+    document.body.appendChild(aLink);
+    aLink.style.display = 'none';
+    aLink.download = '1.jpg';
+    aLink.href = `http://syj.7starsoft2.com:8000${route.params.imgUrl}`;
+    aLink.click();
+    document.body.removeChild(aLink);
 }
 
 </script>
@@ -81,7 +89,7 @@ function downImg(){
         margin: 0 auto;
         display: block;
         margin-top:36px;
-        margin-bottom:36px;
+        margin-bottom:0.4rem;
         border-radius: 10px;
     }
 </style>

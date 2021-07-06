@@ -219,11 +219,11 @@ function onSubmit(){
                     waist: state.form.waist,        // 腰围
                     buttocks: state.form.buttocks,     // 臀围
                     leg:state.form.leg,           // 腿围
-                    size1:res.data.compressionPants, 
-                    size2:res.data.compressionPants, 
-                    size3:res.data.compressionPants, 
-                    size4:res.data.compressionPants, 
-                    size5:res.data.compressionPants, 
+                    size1:res.data.bra, 
+                    size2:res.data.lumbarForceps, 
+                    size3:res.data.corset, 
+                    size4:res.data.trousers, 
+                    size5:res.data.longTrousers, 
                     size6:res.data.compressionPants,
                     imgUrl:res.data.image
                 }
@@ -282,7 +282,7 @@ function closePopup(){
         width: 93px;
         height: 32px;
         float: right;
-        border: 1px solid #fff;
+        border: .02px solid #fff;
         font-size: 22px;
         overflow: hidden;
         position: absolute;

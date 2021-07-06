@@ -21,7 +21,6 @@ import img4 from '../../assets/images/img_14.png'
 import img5 from '../../assets/images/img_15.png'
 import img6 from '../../assets/images/img_16.png'
 const route = useRoute()
-
 const state = reactive({
     list:[{
         img:img1,

@@ -1,4 +1,4 @@
-import { post, get ,baseURL } from './http';
+import { post, get } from './http';
 
 export const api = {
     // 获取所属地区
