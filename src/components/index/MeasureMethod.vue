@@ -21,11 +21,11 @@
 <script setup>
 import { reactive,defineEmits} from 'vue'
 import { useI18n } from 'vue-i18n'
-import img1 from '../../assets/images/logo_03.png'
-import img2 from '../../assets/images/logo_03.png'
-import img3 from '../../assets/images/logo_03.png'
-import img4 from '../../assets/images/logo_03.png'
-import img5 from '../../assets/images/logo_03.png'
+import img1 from '../../assets/images/01.jpg'
+import img2 from '../../assets/images/02.jpg'
+import img3 from '../../assets/images/03.jpg'
+import img4 from '../../assets/images/04.jpg'
+import img5 from '../../assets/images/05.jpg'
 
 const state = reactive({
     t:useI18n().t,
@@ -88,6 +88,7 @@ const emit = defineEmits(["closePopup"])
     .list_box>li>div{
         float: left;
         margin-left:25px;
+        max-width: calc(100% - 3.5rem);
     }
     li .title{
         font-size: 25px;

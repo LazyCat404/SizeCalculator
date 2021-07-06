@@ -17,7 +17,7 @@
                 </span>
             </div>
             <van-dropdown-menu :overlay="false" z-index="99">
-                <van-dropdown-item :title="state.locale == 'en' ? '英文' : '中文'" v-model="state.locale" :options="state.option"/>
+                <van-dropdown-item :title="state.locale == 'en' ? '英文' : `${state.locale == 'zh' ? '中文':'马来'}`" v-model="state.locale" :options="state.option"/>
             </van-dropdown-menu>
         </div>
         <van-form @submit="onSubmit">
@@ -139,12 +139,15 @@ const state = reactive({
     locale:useI18n().locale,
     option:[
         { text: '中文', value: 'zh' },
-        { text: '英文', value: 'en' }
+        { text: '英文', value: 'en' },
+        { text: '马来', value: 'ma' }
     ],
     rCode:props.init.code  // 真实验证码
 });
 // 初始化地区
 state.locale = props.init.region
+state.rCode = props.init.code
+
 // 表单验证
 const fromCheck = {
     top:(val)=>{
@@ -230,7 +233,7 @@ function onSubmit(){
             })
         }else{
             // 错误提示
-            Toast.fail(res.result);
+            Toast.fail(res.message);
         }
     })
 }
@@ -302,7 +305,7 @@ function closePopup(){
         color: #fff;
     }
     .van-dropdown-item{
-        height: 150px;
+        height: 220px;
         top: 264.01px;
         display:flex;
         justify-content: center;
@@ -315,11 +318,10 @@ function closePopup(){
         width: 750px;
     }
     .van-dropdown-item >>> .van-cell {
-        width: 165px;
+        width: 230px;
         font-size: 22px;
-        margin-left: 555px;
+        margin-left: 485px;
         padding: 5px 30px;
-        border: 1px solid #ddd;
     }
     .van-cell{
         overflow: inherit;

@@ -6,11 +6,11 @@ import { Toast } from 'vant'
 
 // 环境的切换
 if (process.env.NODE_ENV === 'development') {   //开发环境
-    axios.defaults.baseURL = 'http://rap2api.taobao.org/app/mock/286373'; 
-} else if (process.env.NODE_ENV === 'test') {   //测试环境
     axios.defaults.baseURL = 'http://rap2api.taobao.org/app/mock/286373';
+} else if (process.env.NODE_ENV === 'test') {   //测试环境
+    axios.defaults.baseURL = '/api';
 } else if (process.env.NODE_ENV === 'production') { //线上环境
-    axios.defaults.baseURL = 'http://syj.7starsoft2.com:8000'; 
+    axios.defaults.baseURL = '/api'; 
 }
 
 // 请求超时时间 10S

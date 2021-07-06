@@ -15,6 +15,7 @@
 import { reactive } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
+import { api } from '../../apis/base_api'
 
 const route = useRoute()
 
@@ -40,13 +41,24 @@ const state = reactive({
 
 // 图片下载
 function downImg(){
-    const aLink = document.createElement('a');
-    document.body.appendChild(aLink);
-    aLink.style.display = 'none';
-    aLink.download = '1.jpg';
-    aLink.href = `http://syj.7starsoft2.com:8000${route.params.imgUrl}`;
-    aLink.click();
-    document.body.removeChild(aLink);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST',api.getImg(), true);
+    xhr.responseType = 'blob';
+    xhr.onload = function() {
+        const data = xhr.response;
+        const aLink = document.createElement('a');
+        document.body.appendChild(aLink);
+        aLink.style.display = 'none';
+        const blob = new Blob([data],{ type:'image/jpeg' });
+        const blobUrl = window.URL.createObjectURL(blob);
+        aLink.download = new Date();
+        aLink.href = blobUrl;
+        aLink.click();
+        document.body.removeChild(aLink);
+    };
+    let formData = new FormData();
+    formData.append('filename',route.params.imgUrl);              
+    xhr.send(formData);
 }
 
 </script>
@@ -78,6 +90,12 @@ function downImg(){
     li.li_table>div{
         border-top: 1px solid #757575;
         border-right: 1px solid #757575;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        word-break: break-all;
     }
     li.li_table:last-child>div{
         border-right: 0;

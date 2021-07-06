@@ -28,5 +28,15 @@ export default defineConfig({
         },
       ],
     }),
-  ]
+  ],
+  // 跨域
+  server:{
+    proxy:{
+      '/api':{
+        target:'http://syj.7starsoft2.com:8000',
+        changeOrigin: true,
+            rewrite: path => path.replace(/^\/api/, '')
+      } 
+    }
+  }
 })
