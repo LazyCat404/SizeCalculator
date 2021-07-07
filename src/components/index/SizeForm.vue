@@ -205,6 +205,7 @@ const fromCheck = {
 function onSubmit(){
     // 表单验证通过
     api.submitForm({
+        region:state.locale,    //地区
         bustTop: state.form.tBust,        // 上胸围
         bustDown: state.form.bBust,        // 下胸围
         waist: state.form.waist,        // 腰围
