@@ -229,7 +229,8 @@ function onSubmit(){
                     size4:res.data.trousers, 
                     size5:res.data.longTrousers, 
                     size6:res.data.compressionPants,
-                    imgUrl:res.data.image
+                    imgUrl:res.data.image,
+                    region:state.locale,    //地区
                 }
             })
         }else{

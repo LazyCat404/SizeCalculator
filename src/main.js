@@ -13,7 +13,8 @@ import {
     DropdownMenu,
     DropdownItem,
     Popup,
-    Toast
+    Toast,
+    Overlay
 } from 'vant';
 
 import 'amfe-flexible/index.js';
@@ -32,6 +33,7 @@ createApp(App)
     .use(DropdownMenu)
     .use(DropdownItem)
     .use(Popup)
+    .use(Overlay)
     .use(Toast)
     .use(i18n)
     .use(store)
