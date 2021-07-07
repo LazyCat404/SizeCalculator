@@ -78,8 +78,8 @@ function downImg(){
         color: #fff;
         text-align: center;
         display: flex;
-        border: 1px solid #757575;
-        border-radius:10px;
+        border: 2px solid #757575;
+        border-radius:10px 10px;
     }
     li.li_table{
         float: left;
