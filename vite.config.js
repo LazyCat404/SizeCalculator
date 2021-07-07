@@ -31,6 +31,7 @@ export default defineConfig({
   ],
   // 跨域
   server:{
+    host:'0.0.0.0',
     proxy:{
       '/api':{
         target:'http://syj.7starsoft2.com:8000',
