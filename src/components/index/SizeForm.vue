@@ -270,7 +270,8 @@ function closePopup(){
         background-size:100% 100%;
         text-align: center;
         padding-top:45px;
-        font-size:33px;
+        font-size:32px;
+        font-weight: bold;
         line-height: 33px;
         color: #fff;
     }
@@ -287,14 +288,16 @@ function closePopup(){
         padding: 0 34px 72px 33px;
     }
     .title_form{
-        font-size: 30px;
+        font-size: 32px;
+        font-weight: bold;
         color: #fff;
         margin-left: 30px;
         position: relative;
     }
     .measure_btn{
-        font-size:22px;
+        font-size:24px;
         margin-left:23px;
+        font-weight: 400;
     }
     .measure_btn span{
         border-bottom: 1px solid #fff;
@@ -306,7 +309,7 @@ function closePopup(){
         height: 32px;
         float: right;
         border: 1.5px solid #fff;
-        font-size: 22px;
+        font-size: 24px;
         overflow: hidden;
         position: absolute;
         right: 0;
