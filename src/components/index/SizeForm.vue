@@ -393,6 +393,7 @@ function closePopup(){
         width: 595px;
         height: 82px;
         font-size: 32px;
+        font-weight: bold;
         margin: 0 auto;
         display: block;
         margin-top:45px;

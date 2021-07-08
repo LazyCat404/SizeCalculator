@@ -26,8 +26,9 @@ const state = reactive({
     }
     .text{
         text-align: center;
-        font-size:28px;
+        font-size:30px;
         line-height: 48px;
         color: #fff;
+        font-weight: bold;
     }
 </style>

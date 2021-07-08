@@ -4,7 +4,7 @@
             <img :src="item.img">
             <div>
                 <div>{{item.text}}</div>
-                <div>{{item.size}}</div>
+                <div class="size">{{item.size}}</div>
             </div>
         </li>
     </ul>
@@ -66,7 +66,8 @@ const state = reactive({
         float: left;
         color: #fff;
         text-align: center;
-        font-size: 25px;
+        font-size: 28px;
+        font-weight: bold;
     }
     li img{
         width: 188px;
@@ -75,5 +76,8 @@ const state = reactive({
         margin-top:10px;
         line-height: 45px;
         margin-bottom:45px;
+    }
+    div.size{
+        font-size: 40px;
     }
 </style>

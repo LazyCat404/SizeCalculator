@@ -105,7 +105,8 @@ function downImg(){
         color: #fff;
         text-align: center;
         position:relative;
-        font-size: 23px;
+        font-size: 28px;
+        font-weight: bold;
         top: 41.5px;
     }
     ul{
@@ -122,11 +123,12 @@ function downImg(){
         float: left;
         flex: 1;
         line-height: 55px;
-        font-size: 23px;
+        font-size: 28px;
+        font-weight: 300;
     }
     li.li_table>div{
-        border-top: 1px solid #757575;
-        border-right: 1px solid #757575;
+        border-top: 2px solid #757575;
+        border-right: 2px solid #757575;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
@@ -140,7 +142,8 @@ function downImg(){
     .van-button{
         width: 597px;
         height: 82px;
-        font-size: 28px;
+        font-size: 32px;
+        font-weight: bold;
         margin: 0 auto;
         display: block;
         margin-top:36px;
