@@ -20,13 +20,14 @@
                 <van-dropdown-item :title="state.locale == 'en' ? '英文' : `${state.locale == 'zh' ? '中文':'马来'}`" v-model="state.locale" :options="state.option"/>
             </van-dropdown-menu>
         </div>
-        <van-form @submit="onSubmit">
+        <van-form @submit="onSubmit" @failed="failed">
             <div class="form_box">
                 <div>
                     <span class="form_lable">{{state.t("form.top")}}(cm)</span>
                     <van-field 
                         v-model="state.form.tBust" 
                         type="number" 
+                        name="top"
                         :placeholder="state.t('form.inTop')" 
                         :rules="[
                             { required: true, message: `${state.t('form.inTop')}` },
@@ -39,6 +40,7 @@
                     <van-field 
                         v-model="state.form.bBust" 
                         type="number" 
+                        name="bottom"
                         :placeholder="state.t('form.inBottom')" 
                         :rules="[
                             { required: true, message: `${state.t('form.inBottom')}` },
@@ -47,22 +49,11 @@
                     />
                 </div>
                 <div>
-                    <span class="form_lable">{{state.t("form.buttocks")}}(cm)</span>
-                    <van-field 
-                        v-model="state.form.buttocks" 
-                        type="number" 
-                        :placeholder="state.t('form.inButtocks')"
-                        :rules="[
-                            { required: true, message: `${state.t('form.inButtocks')}` },
-                            { validator: fromCheck.buttocks }
-                        ]" 
-                    />
-                </div>
-                <div>
                     <span class="form_lable">{{state.t("form.waist")}}(cm)</span>
                     <van-field 
                         v-model="state.form.waist" 
                         type="number" 
+                        name="waist"
                         :placeholder="state.t('form.inWaist')" 
                         :rules="[
                             { required: true, message: `${state.t('form.inWaist')}` },
@@ -71,9 +62,23 @@
                     />
                 </div>
                 <div>
+                    <span class="form_lable">{{state.t("form.buttocks")}}(cm)</span>
+                    <van-field 
+                        v-model="state.form.buttocks" 
+                        type="number" 
+                        name="buttocks"
+                        :placeholder="state.t('form.inButtocks')"
+                        :rules="[
+                            { required: true, message: `${state.t('form.inButtocks')}` },
+                            { validator: fromCheck.buttocks }
+                        ]" 
+                    />
+                </div>
+                <div>
                     <span class="form_lable">{{state.t("form.leg")}}(cm)</span>
                     <van-field 
                         v-model="state.form.leg" 
+                        name="leg"
                         type="number" 
                         :placeholder="state.t('form.inLeg')"
                         :rules="[
@@ -87,6 +92,7 @@
                     <van-field 
                         v-model="state.form.code" 
                         type="number" 
+                        name="code"
                         :placeholder="state.t('form.code')" 
                         :rules="[
                             { required: true, message: `${state.t('form.incode')}` },
@@ -108,7 +114,13 @@
         </van-form>
     </div>
     <!-- 弹出层 -->
-    <van-popup v-model:show="state.showPopup" position="bottom" :style="{ background: 'transparent'}">
+    <van-popup 
+        :transition-appear='true'
+        :lazy-render='false'
+        v-model:show="state.showPopup" 
+        position="bottom" 
+        :style="{ background: 'transparent'}"
+    >
         <MeasureMethod @closePopup="closePopup"></MeasureMethod>
     </van-popup>
 </template>
@@ -239,6 +251,12 @@ function onSubmit(){
         }
     })
 }
+function failed(obj){
+    Toast({
+        message: obj.errors[0].message,
+        position: 'bottom',
+    });
+}
 // 关闭弹出层
 function closePopup(){
     state.showPopup = false
@@ -287,7 +305,7 @@ function closePopup(){
         width: 93px;
         height: 32px;
         float: right;
-        border: .02px solid #fff;
+        border: 1.5px solid #fff;
         font-size: 22px;
         overflow: hidden;
         position: absolute;
@@ -329,6 +347,7 @@ function closePopup(){
         overflow: inherit;
     }
     .van-cell >>> .van-field__error-message{
+        display: none;
         color: #ee0a24b3;
         position: absolute;
         font-size: 16px;
