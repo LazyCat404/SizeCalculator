@@ -68,22 +68,23 @@ const emit = defineEmits(["closePopup"])
 <style scoped>
     .list_box{
         background: #fff;
-        width: 684px;
+        width: 750px;
         margin: 0 auto;
         border-radius: 30px 30px 0 0;
         overflow: hidden;
-        padding: 33px;
     }
     .list_box>li{
         overflow: hidden;
         padding: 20px 0;
-        border-bottom:2px solid #f2f2f2;
+        border-bottom:2px solid rgb(175, 175, 175);
+        margin: 0 33px; 
     }
     .list_box>li img{
+        width: 195px;
+        height: 123px;
+        border-radius: 12px;
         float: left;
-        width: 200px;
-        height: 125px;
-        border: 1px solid #f2f2f2;
+        border: 2px solid rgb(175, 175, 175);
     }
     .list_box>li>div{
         float: left;
@@ -91,46 +92,52 @@ const emit = defineEmits(["closePopup"])
         max-width: calc(100% - 3.5rem);
     }
     li .title{
-        font-size: 25px;
+        font-size: 28px;
         color: #606060;
         line-height: 46px;
+        font-weight: bold;
     }
     li .describe{
-        font-size: 18px;
+        font-size: 22px;
         color: #606060;
         line-height: 42px;
     }
     li .explain{
-        font-size: 18px;
-        color: #cdcdcd;
+        font-size: 22px;
+        color: #999;
         line-height: 38px;
     }
     .list_box>li:first-child{
-        font-size: 26px;
-        line-height: 85px;
-        padding: 0;
+        line-height: 112px;
         color: #606060;
-        border-bottom:0;
+        margin: 0;
+        padding: 0;
+        padding-left:63px;
+        padding-right:36px;
+        font-size: 28px;
+        font-weight: bold;
     }
     li.tip{
-        font-size: 20px;
-        padding: 15px 0 110px 0;
+        width: 670px;
+        font-size: 22px;
         color: #606060;
         border-bottom:0;
         line-height: 32px;
         display: flex;
     }
     li.tip>span{
-        width: 190px;
         text-align: right;
     }
     li.tip>div{
+        flex: 1;
         margin-left:0px;
+        max-width: 750px !important;
     }
     li >>> .van-badge__wrapper{
         float: right;
-        line-height: 85px;
+        line-height: 112px;
         color: #ff5a5f;
         font-size: 33px;
+        cursor: pointer;
     }
 </style>

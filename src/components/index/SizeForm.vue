@@ -406,7 +406,7 @@ function closePopup(){
     .form_box>div.tips{
         width: 595px;
         font-size: 14px;
-        margin: 0;
+        margin: 0 auto;
         font-weight: bold;
         margin-top:19px;
         color: #606060;
@@ -418,11 +418,11 @@ function closePopup(){
         display: flex;
     }
     .tips>div>span{
-        width: 100PX;
         float: left;
         text-align: right;
     }
     .tips>div>div{
+        flex: 1;
         float: left;
     }
 </style>
