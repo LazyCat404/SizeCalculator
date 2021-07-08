@@ -87,7 +87,7 @@
                         ]"  
                     />
                 </div>
-                <div>
+                <div style="margin: 0;">
                     <span class="form_lable">{{state.t("form.code")}}</span>
                     <van-field 
                         v-model="state.form.code" 
@@ -265,7 +265,7 @@ function closePopup(){
 
 <style scoped>
     .title_logo{
-        height: 787px;
+        height: 762px;
         background: url('../../assets/images/bg.png');
         background-size:100% 100%;
         text-align: center;
@@ -284,7 +284,7 @@ function closePopup(){
     .form_body{
         position:absolute;
         top: 230px;
-        padding: 0 35px;
+        padding: 0 34px 72px 33px;
     }
     .title_form{
         font-size: 30px;
@@ -362,34 +362,37 @@ function closePopup(){
         border-radius:0 0 5px 5px;
     }
     .form_box{
-        width: 620px;
+        width: 623px;
         margin-top: 22px;
         padding: 60px 30px;
-        background: #fff;
-        border-radius: 35px; 
-        box-shadow:0px 1px 15px 2.5px #2e2d2f61;   
-        margin-bottom: 70px;
+        margin-bottom: 72px;
+        background: #FEFFFA;
+        box-shadow: 0px 0px 23px 3px rgba(46, 45, 47, 0.38);
+        border-radius: 40px;
     }
     .form_box>div{
-        margin-bottom: 45px;
+        margin-bottom: 48px;
         position: relative;
     }
     .form_lable{
-        font-size: 25px;
+        font-size: 28px;
         color: #606060;
     }
     .van-field{
         padding: 0 5px;
         border-bottom:1px solid #999;
-        font-size: 20px;
+        font-size: 24px;
+    }
+    .van-field>>>.van-field__value{
+        line-height: 43px;
     }
     .van-button{
-        width: 597px;
+        width: 595px;
         height: 82px;
-        font-size: 28px;
+        font-size: 32px;
         margin: 0 auto;
         display: block;
-        margin-top:70px;
+        margin-top:45px;
         border-radius: 10px;
     }
     .verification_code{
@@ -401,10 +404,11 @@ function closePopup(){
         color: #5f5f5f;
     }
     .form_box>div.tips{
-        font-size: 16px;
+        width: 595px;
+        font-size: 14px;
         margin: 0;
-        margin-top:10px;
-        line-height: 40px;
+        font-weight: bold;
+        margin-top:19px;
         color: #606060;
     }
     .tips>div{
