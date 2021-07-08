@@ -109,7 +109,7 @@
     </div>
     <!-- 弹出层 -->
     <van-popup v-model:show="state.showPopup" position="bottom" :style="{ background: 'transparent'}">
-        <MeasureMethod v-if="state.showPopup" @closePopup="closePopup"></MeasureMethod>
+        <MeasureMethod @closePopup="closePopup"></MeasureMethod>
     </van-popup>
 </template>
 
