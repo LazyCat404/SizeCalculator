@@ -99,7 +99,9 @@
                             { validator: fromCheck.code }
                         ]"
                     />
-                    <span class="verification_code">{{state.rCode}}</span>
+                    <img :src="state.imgSrc" class="verification_code">
+                    <!-- <span class="code_layer"></span> -->
+                    <!-- <span class="verification_code">{{state.rCode}}</span> -->
                 </div>
                 <!-- 按钮 -->
                 <van-button color="#ff5a60" native-type="submit">{{state.t("form.compute")}}</van-button>
@@ -154,12 +156,43 @@ const state = reactive({
         { text: '英文', value: 'en' },
         { text: '马来', value: 'ma' }
     ],
-    rCode:props.init.code  // 真实验证码
+    rCode:props.init.code,  // 真实验证码
+    imgSrc:''
 });
 // 初始化地区
 state.locale = props.init.region
 state.rCode = props.init.code
-
+// 验证码图片
+function drawLogo(text) {
+    // 创建画布
+    let canvas = document.createElement('canvas');
+    // 绘制文字环境
+    let context = canvas.getContext('2d');
+    // 获取字体宽度
+    let width = context.measureText(text).width;
+    // 画布宽度
+    canvas.width = 61;
+    // 画布高度
+    canvas.height = 25;
+    // 填充白色
+    context.fillStyle = '#FEFFFA';
+    // 绘制文字之前填充白色
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    // 设置字体
+    context.font = '0.32rem 苹方黑体';
+    // 设置水平对齐方式
+    context.textAlign = 'center';
+    // 设置垂直对齐方式
+    context.textBaseline = 'middle';
+    // 设置字体颜色
+    context.fillStyle = '#5f5f5f';
+    // 绘制文字（参数：要写的字，x坐标，y坐标）
+    context.fillText(text, canvas.width / 2, canvas.height / 2);
+    // 生成图片信息
+    let dataUrl = canvas.toDataURL('image/png');
+    return dataUrl;
+}
+state.imgSrc = drawLogo(state.rCode)
 // 表单验证
 const fromCheck = {
     top:(val)=>{
@@ -349,6 +382,9 @@ function closePopup(){
     .van-cell{
         overflow: inherit;
     }
+    .van-cell::after{
+        border: 0;
+    }
     .van-cell >>> .van-field__error-message{
         display: none;
         color: #ee0a24b3;
@@ -382,12 +418,16 @@ function closePopup(){
         color: #606060;
     }
     .van-field{
-        padding: 0 5px;
-        border-bottom:1px solid #999;
+        padding: 0px;
+        /* border-bottom:1px solid #999; */
         font-size: 24px;
     }
     .van-field>>>.van-field__value{
         line-height: 43px;
+    }
+    .form_box>>>.van-field__control{
+        background-color: #FEFFFA;
+        border-bottom:1.5px solid #999;
     }
     .van-button{
         width: 595px;
@@ -428,5 +468,15 @@ function closePopup(){
     .tips>div>div{
         flex: 1;
         float: left;
+    }
+    .code_layer{
+        display: inline-block;
+        width: 80px;
+        height: 50px;
+        top: 30px;
+        background: transparent;
+        position: absolute;
+        right: 0;
+        z-index: 999;
     }
 </style>
