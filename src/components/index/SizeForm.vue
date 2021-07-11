@@ -25,9 +25,11 @@
                 <div>
                     <span class="form_lable">{{state.t("form.top")}}(cm)</span>
                     <van-field 
+                        :class="state.style.top"
                         v-model="state.form.tBust" 
                         type="number" 
                         name="top"
+                        @blur="blurInput('top',state.form.tBust)"
                         :placeholder="state.t('form.inTop')" 
                         :rules="[
                             { required: true, message: `${state.t('form.inTop')}` },
@@ -38,9 +40,11 @@
                 <div>
                     <span class="form_lable">{{state.t("form.bottom")}}(cm)</span>
                     <van-field 
+                        :class="state.style.bottom"
                         v-model="state.form.bBust" 
                         type="number" 
                         name="bottom"
+                        @blur="blurInput('bottom',state.form.bBust)"
                         :placeholder="state.t('form.inBottom')" 
                         :rules="[
                             { required: true, message: `${state.t('form.inBottom')}` },
@@ -51,10 +55,13 @@
                 <div>
                     <span class="form_lable">{{state.t("form.waist")}}(cm)</span>
                     <van-field 
+                        :class="state.style.waist"
                         v-model="state.form.waist" 
                         type="number" 
                         name="waist"
+                        @blur="blurInput('waist',state.form.waist)"
                         :placeholder="state.t('form.inWaist')" 
+                        :show-error='true'
                         :rules="[
                             { required: true, message: `${state.t('form.inWaist')}` },
                             { validator: fromCheck.waist }
@@ -64,9 +71,11 @@
                 <div>
                     <span class="form_lable">{{state.t("form.buttocks")}}(cm)</span>
                     <van-field 
+                        :class="state.style.buttocks"
                         v-model="state.form.buttocks" 
                         type="number" 
                         name="buttocks"
+                        @blur="blurInput('buttocks',state.form.buttocks)"
                         :placeholder="state.t('form.inButtocks')"
                         :rules="[
                             { required: true, message: `${state.t('form.inButtocks')}` },
@@ -77,9 +86,11 @@
                 <div>
                     <span class="form_lable">{{state.t("form.leg")}}(cm)</span>
                     <van-field 
+                        :class="state.style.leg"
                         v-model="state.form.leg" 
                         name="leg"
                         type="number" 
+                        @blur="blurInput('leg',state.form.leg)"
                         :placeholder="state.t('form.inLeg')"
                         :rules="[
                             { required: true, message: `${state.t('form.inLeg')}` },
@@ -90,9 +101,11 @@
                 <div style="margin: 0;">
                     <span class="form_lable">{{state.t("form.code")}}</span>
                     <van-field 
+                        :class="state.style.code"
                         v-model="state.form.code" 
                         type="number" 
                         name="code"
+                        @blur="blurInput('code',state.form.code)"
                         :placeholder="state.t('form.code')" 
                         :rules="[
                             { required: true, message: `${state.t('form.incode')}` },
@@ -157,7 +170,15 @@ const state = reactive({
         { text: '马来', value: 'ma' }
     ],
     rCode:props.init.code,  // 真实验证码
-    imgSrc:''
+    imgSrc:'',
+    style:{
+        top:null,
+        bottom:null,
+        waist: null,        // 腰围
+        buttocks: null,     // 臀围
+        leg:null,           // 腿围
+        code:null,   
+    }
 });
 // 初始化地区
 state.locale = props.init.region
@@ -196,10 +217,12 @@ state.imgSrc = drawLogo(state.rCode)
 // 表单验证
 const fromCheck = {
     top:(val)=>{
+        state.style.top='borderRed'
         if( 75 <= val && val <= 127.5){
             if(val < state.form.bBust){
                 return  state.t('tips.tp')
             }else{
+                state.style.top = null
                 return true
             }
         }else{
@@ -207,17 +230,21 @@ const fromCheck = {
         }
     },
     bottom:(val)=>{
+        state.style.bottom='borderRed'
         if( 65 <= val && val <= 100){
+            state.style.bottom=null
             return true
         }else{
             return  state.t('tips.bErr')
         }
     },
     waist:(val)=>{
+        state.style.waist='borderRed'
         if( 55 <= val && val <= 127){
             if(val > state.form.buttocks){
                 return  state.t('tips.wb')
             }else{
+                state.style.waist=null
                 return true
             }
         }else{
@@ -225,21 +252,27 @@ const fromCheck = {
         }
     },
     buttocks:(val)=>{
+        state.style.buttocks='borderRed'
         if( 79 <= val && val <= 128){
+            state.style.buttocks=null
             return true
         }else{
             return  state.t('tips.dErr')
         }
     },
     leg:(val)=>{
+        state.style.leg='borderRed'
         if( 42 <= val && val <= 74){
+            state.style.leg=null
             return true
         }else{
             return  state.t('tips.lErr')
         }
     },
     code:(val)=>{
+        state.style.code='borderRed'
         if( val == state.rCode){
+            state.style.code=null
             return true
         }else{
             return  state.t('tips.code')
@@ -285,10 +318,34 @@ function onSubmit(){
     })
 }
 function failed(obj){
+    // 提示第一个
     Toast({
         message: obj.errors[0].message,
         position: 'bottom',
     });
+    // 边框变红
+    state.style = {
+        top:null,
+        bottom:null,
+        waist: null,        // 腰围
+        buttocks: null,     // 臀围
+        leg:null,           // 腿围
+        code:null,   
+    }
+    obj.errors.forEach(item => {
+        state.style[item.name] = 'borderRed'
+    })
+}
+function blurInput(type,val){
+    if(val){
+        let msg = fromCheck[type](val)
+        if(msg !== true){
+            Toast({
+                message: fromCheck[type](val),
+                position: 'bottom',
+            });
+        }
+    }
 }
 // 关闭弹出层
 function closePopup(){
@@ -428,6 +485,10 @@ function closePopup(){
     .form_box>>>.van-field__control{
         background-color: #FEFFFA;
         border-bottom:1.5px solid #999;
+    }
+    .borderRed >>> .van-field__control{
+        background-color: #FEFFFA;
+        border-bottom:1.5px solid red;
     }
     .van-button{
         width: 595px;
