@@ -169,7 +169,6 @@ const state = reactive({
         { text: '英文', value: 'en' },
         { text: '马来', value: 'ma' }
     ],
-    rCode:props.init.code,  // 真实验证码
     imgSrc:'',
     style:{
         top:null,
@@ -182,8 +181,7 @@ const state = reactive({
 });
 // 初始化地区
 state.locale = props.init.region
-state.rCode = props.init.code
-state.imgSrc = props.init.codeImg
+state.imgSrc = 'http://syj.7starsoft2.com:8000/api/getSecurityCode1'
 // 表单验证
 const fromCheck = {
     top:(val)=>{
@@ -253,11 +251,11 @@ const fromCheck = {
     },
     code:(val)=>{
         state.style.code='borderRed'
-        if( val == state.rCode){
+        if(val){
             state.style.code=null
             return true
         }else{
-            return  state.t('tips.code')
+            return  state.t('form.incode')
         }
     },
 }
