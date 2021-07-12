@@ -183,37 +183,7 @@ const state = reactive({
 // 初始化地区
 state.locale = props.init.region
 state.rCode = props.init.code
-// 验证码图片
-function drawLogo(text) {
-    // 创建画布
-    let canvas = document.createElement('canvas');
-    // 绘制文字环境
-    let context = canvas.getContext('2d');
-    // 获取字体宽度
-    let width = context.measureText(text).width;
-    // 画布宽度
-    canvas.width = 61;
-    // 画布高度
-    canvas.height = 25;
-    // 填充白色
-    context.fillStyle = '#FEFFFA';
-    // 绘制文字之前填充白色
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    // 设置字体
-    context.font = '0.32rem 苹方黑体';
-    // 设置水平对齐方式
-    context.textAlign = 'center';
-    // 设置垂直对齐方式
-    context.textBaseline = 'middle';
-    // 设置字体颜色
-    context.fillStyle = '#5f5f5f';
-    // 绘制文字（参数：要写的字，x坐标，y坐标）
-    context.fillText(text, canvas.width / 2, canvas.height / 2);
-    // 生成图片信息
-    let dataUrl = canvas.toDataURL('image/png');
-    return dataUrl;
-}
-state.imgSrc = drawLogo(state.rCode)
+state.imgSrc = props.init.codeImg
 // 表单验证
 const fromCheck = {
     top:(val)=>{

@@ -11,6 +11,7 @@ const sizeForm = ref();     // 获取 dom 节点
 const state = reactive({
     init:{
         code:null,
+        codeImg:null,
         region:null
     }
 }) 
@@ -30,6 +31,7 @@ api.getRundata().then(res=>{
 api.getCode().then(res =>{
     if(res.result == 'SUCCESS'){
         state.init.code = res.data.code
+        state.init.codeImg = res.data.url   // 二维码图片路径
     } else{
         Toast.fail(res.message);
     }
