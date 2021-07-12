@@ -241,8 +241,13 @@ const fromCheck = {
     waist:(val)=>{
         state.style.waist='borderRed'
         if( 55 <= val && val <= 127){
-            if(val > state.form.buttocks){
-                return  state.t('tips.wb')
+            if(state.form.buttocks){
+                if(val > state.form.buttocks){
+                    return  state.t('tips.wb')
+                }else{
+                    state.style.waist=null
+                    return true
+                }
             }else{
                 state.style.waist=null
                 return true
@@ -254,6 +259,13 @@ const fromCheck = {
     buttocks:(val)=>{
         state.style.buttocks='borderRed'
         if( 79 <= val && val <= 128){
+            let err =  fromCheck.waist(state.form.waist)
+            if(err !== true){
+                Toast({
+                    message: err,
+                    position: 'bottom',
+                });
+            }
             state.style.buttocks=null
             return true
         }else{
