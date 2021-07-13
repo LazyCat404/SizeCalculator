@@ -14,7 +14,7 @@
     "inWaist":"Please enter waist measurement (55~127cm)",
     "inButtocks":"Please enter hips measurement (79~128cm)",
     "inLeg":"Please enter thigh measurement (42~74cm)",
-    "incode":"Calculate the size",
+    "incode":"Please enter the number on the right",
     "compute":"Calculate the size",
     "tips":"If your figure is beyond the input range, please contact the sales person for assistance."
   },

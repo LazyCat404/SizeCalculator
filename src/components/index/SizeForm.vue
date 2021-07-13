@@ -10,15 +10,17 @@
     <div class="form_body">
         <div class="title_form">
             <div>
-                <span>{{state.t("form.info")}}</span>
+                {{state.t("form.info")}}
+            </div>
+            <div>
                 <span class="measure_btn">
                     <van-icon name="question-o" />
                     <span @click="() =>{state.showPopup = true}">{{state.t("form.measure")}}</span>
                 </span>
+                <van-dropdown-menu :overlay="false" z-index="99">
+                    <van-dropdown-item :title="state.locale == 'en' ? '英文' : `${state.locale == 'zh' ? '中文':'马来'}`" v-model="state.locale" :options="state.option"/>
+                </van-dropdown-menu>
             </div>
-            <van-dropdown-menu :overlay="false" z-index="99">
-                <van-dropdown-item :title="state.locale == 'en' ? '英文' : `${state.locale == 'zh' ? '中文':'马来'}`" v-model="state.locale" :options="state.option"/>
-            </van-dropdown-menu>
         </div>
         <van-form @submit="onSubmit" @failed="failed">
             <div class="form_box">
@@ -133,6 +135,7 @@
         :transition-appear='true'
         :lazy-render='false'
         v-model:show="state.showPopup" 
+        v-if="state.showPopup" 
         position="bottom" 
         :style="{ background: 'transparent'}"
     >
@@ -209,17 +212,8 @@ const fromCheck = {
     waist:(val)=>{
         state.style.waist='borderRed'
         if( 55 <= val && val <= 127){
-            if(state.form.buttocks){
-                if(val > state.form.buttocks){
-                    return  state.t('tips.wb')
-                }else{
-                    state.style.waist=null
-                    return true
-                }
-            }else{
-                state.style.waist=null
-                return true
-            }
+            state.style.waist=null
+            return true
         }else{
             return  state.t('tips.wErr')
         }
@@ -227,13 +221,6 @@ const fromCheck = {
     buttocks:(val)=>{
         state.style.buttocks='borderRed'
         if( 79 <= val && val <= 128){
-            let err =  fromCheck.waist(state.form.waist)
-            if(err !== true){
-                Toast({
-                    message: err,
-                    position: 'bottom',
-                });
-            }
             state.style.buttocks=null
             return true
         }else{
